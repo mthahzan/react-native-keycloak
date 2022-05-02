@@ -107,6 +107,10 @@ class RNAdapter implements KeycloakAdapter {
         return this.client.processCallback(oauth);
       }
 
+      if (res.type === 'cancel') {
+        throw new Error('User has closed the browser');
+      }
+
       throw new Error('Registration flow failed');
     } else {
       throw new Error('InAppBrowser not available');
